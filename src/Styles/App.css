@@ -1,0 +1,21 @@
+.clickable {
+  cursor: pointer;
+}
+.userdata_edit {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.editable {
+  /* border: 1px solid brown; */
+  padding: 5px;
+}
+.editable input {
+  width: 100%;
+  border: 0px solid black;
+}
+/*? test */
+
+.show-User {
+  background-color: rgba(255, 0, 0, 0.253);
+}
