@@ -1,6 +1,5 @@
-import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { useEffect, useState, useRef } from "react";
+import { useDispatch, useSelector, useStore } from "react-redux";
 
 import User from "../User/User";
 
@@ -8,30 +7,57 @@ import {
   retrieveUsers,
   findUsersById,
   deleteAllUsers,
+  createUser,
 } from "./../../actions/usersActions";
 
+import ConfirmationModal from "Components/Other/ConfirmationModal";
+import AddUserModal from "Components/Other/AddUserModalDELETE";
+import AddUser from "./AddUser";
+import ContentModal from "Components/Other/ContentModal";
+
 const UserList = () => {
+  const STORE = useStore();
+  // useDispatch initialization for handling dispatch
   const dispatch = useDispatch();
+  // Obtains current state on the store
   const currentUsersState = useSelector((state) => state).userReducer;
-
+  // Selected user is used for showing user component
   const [selectedUser, setSelectedUser] = useState(null);
+  // Selects index of list of Users
   const [currentIndex, setCurrentIndex] = useState(-1);
+  // Search User holds the id value to search on search by id action
   const [searchUser, setSerchUser] = useState("");
+  // All users Array,
   const [users, setUsers] = useState([]);
+  const [newUser, setNewUser] = useState({});
 
+  let [listWasModified, setListWasModified] = useState(0);
+
+  const listModifiedHandler = (n) => {
+    setListWasModified(++listWasModified);
+  };
+
+  useEffect(() => {
+    console.log(`algún cambio en USERS => ${users}, en userlist`);
+  }, [users]);
+
+  //TODO This works
   // OnLoad, we dispatch the retrieve users
   useEffect(() => {
     async function fetchData() {
       dispatch(retrieveUsers());
     }
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, listWasModified]);
 
   //Onchange => ,
   useEffect(() => {
-    console.log("users before setuser", users);
+    // console.log("users before setuser", users);
     setUsers(currentUsersState);
+    refreshData();
   }, [currentUsersState, users]);
+
+  //TODO This works
 
   const onChangeSearchUser = (e) => {
     const searchUser = e.target.value;
@@ -42,10 +68,12 @@ const UserList = () => {
     setSelectedUser(null);
     setCurrentIndex(-1);
   };
+
   const setActiveUser = (user, index) => {
     setSelectedUser(user);
     setCurrentIndex(index);
-    console.log(user);
+
+    console.log("index=> ", index);
   };
 
   const findByUser = () => {
@@ -64,62 +92,118 @@ const UserList = () => {
         console.log(e);
       });
   };
+  const addNewUser = (data) => {
+    setNewUser(data);
+    console.log("New User ", newUser);
+    const { firstName, lastName, email, phone } = newUser;
 
-  const handleNameClick = (e) => {
-    e.preventDefault();
-    console.log(`Test => ${e.target.innerText}`);
+    dispatch(createUser(firstName, lastName, email, phone))
+      .then((data) => {
+        console.log(`se mandó correctamente ${data}`);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   if (users !== []) {
     return (
-      <div className="row mt-5">
+      <div className="userListComponent row  pb-5">
+        <h1 className="userListComponent-title">
+          userListComponent = hay {users.length}
+          || timees modified = {listWasModified}
+        </h1>
         <div className="user-list row  col-md-9  col-sm-7 justify-content-around">
           <div className="input-group mb-2">
-            <input
-              type="text"
-              className="form-control  "
-              placeholder="Search by User name"
-              value={searchUser}
-              onChange={onChangeSearchUser}
-            />
-            <div className="input-group-append">
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={findByUser}
-              >
-                Search
-              </button>
+            <div className="input-group_search ">
+              <input
+                type="text"
+                className="form-control  "
+                placeholder="Search by User name"
+                value={searchUser}
+                onChange={onChangeSearchUser}
+              />
+              <div className="input-group-append">
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={findByUser}
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+            <div className="user-preview_header">
+              <p>First Name 🖋: </p>
+              <p>Last Name: ✏ </p>
+              <p>Email: 📧 </p>
+              <p>Phone 📞: </p>
             </div>
           </div>
 
-          <div className=" row">
-            {users.map((user, index) => (
-              <div
-                onClick={() => setActiveUser(user, index)}
-                className=" col-md-4 border "
-                key={user._id}
-              >
-                <p>First Name 🖋: {user.firstName}</p>
-                <p>Last Name: ✏{user.lastName}</p>
-                <p>Email: 📧{user.email}</p>
-                <p>Phone 📞: {user.phone}</p>
+          <div className=" ">
+            {users ? (
+              users.map((user, index) => (
+                <div
+                  onClick={() => {
+                    setActiveUser(user, index);
+                  }}
+                  className="user-preview clickable border "
+                  key={user._id}
+                >
+                  <p> {user.firstName}</p>
+                  <p> {user.lastName}</p>
+                  <p>{user.email}</p>
+                  <p>{user.phone}</p>
+                </div>
+              ))
+            ) : (
+              <div>
+                <p>Select a user</p>
               </div>
-            ))}
+            )}
           </div>
-          <div className="col-md-12  float-start mt-2">
+          <div className="col-md-12  float-start mt-2 user-list_options ">
+            <ContentModal
+              buttonText={"Create new User"}
+              variant={"primary"}
+              title={"Create new User"}
+              content={<AddUser />}
+              action={"Create new user VERDE?"}
+              accept={"Create User"}
+              buttonState={false}
+              buttonAction={addNewUser}
+              listWasModified={listWasModified}
+              listModifiedHandler={listModifiedHandler}
+              formId={"createNewUserForm"}
+            ></ContentModal>
+
+            <ConfirmationModal
+              buttonText={"delete all"}
+              variant={"danger"}
+              action={"delete this user?"}
+              accept={"Delete User"}
+              buttonState={true}
+              buttonAction={removeAllUsers}
+            />
+
             <button
-              type="button"
-              className="btn btn-danger"
-              onClick={removeAllUsers}
-              disabled
+              className="btn btn-warning noDisplay"
+              onClick={() => {
+                // console.log(JSON.stringify(STORE));
+                console.log(STORE.getState().userReducer);
+              }}
             >
-              Remove all
+              STORE getState userReducer
             </button>
           </div>
         </div>
-        <div className="  col-md-3 col-sm-5 mt-5 border">
-          <User selectedUser={selectedUser} />
+        <div className="  col-md-3 col-sm-5 mt-5 border show-User">
+          <User
+            selectedUser={selectedUser}
+            listWasModified={listWasModified}
+            listModifiedHandler={listModifiedHandler}
+          />
         </div>
       </div>
     );

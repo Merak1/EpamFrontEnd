@@ -3,8 +3,13 @@
 }
 .userdata_edit {
   display: flex;
-  justify-content: space-between;
   width: 100%;
+  justify-content: space-between;
+}
+.userdata_button {
+  display: flex;
+  width: 100%;
+  justify-content: end;
 }
 .editable {
   /* border: 1px solid brown; */
@@ -12,10 +17,44 @@
 }
 .editable input {
   width: 100%;
-  border: 0px solid black;
 }
-/*? test */
-
+/*? custom class */
+.user-preview {
+  display: flex;
+  width: 100%;
+  text-align: center;
+}
+.user-preview p {
+  width: 100%;
+}
+.user-preview_header {
+  display: flex;
+  width: 100%;
+  text-align: center;
+}
+.user-preview_header p {
+  width: 100%;
+}
+.user-preview:hover {
+  background-color: rgba(0, 27, 114, 0.164);
+}
 .show-User {
-  background-color: rgba(255, 0, 0, 0.253);
+  height: fit-content;
+}
+.editable-content {
+  display: flex;
+}
+.user {
+  height: 100%;
+}
+.input-group_search {
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.user-list_options {
+  text-align: end;
+}
+.create-user_button {
+  background-color: red;
 }

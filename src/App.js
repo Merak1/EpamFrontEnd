@@ -1,5 +1,5 @@
 import "./Styles/App.css";
-import {Routes, Route, Link} from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import UserList from "./Components/User/UserList";
 import User from "./Components/User/User";
 import AddUser from "./Components/User/AddUser";
@@ -19,19 +19,12 @@ function App() {
               User list
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to={"/addUser"} className="nav-link">
-              Add user
-            </Link>
-          </li>
         </div>
       </nav>
       <div className="container-fluid">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/users/:id" element={<User />} />
           <Route path="/userlist" element={<UserList />} />
-          <Route path="/addUser" element={<AddUser />} />
         </Routes>
       </div>
     </div>

@@ -1,15 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./Styles/index.css";
+import "./Styles/componentsIdentifiers.css";
+import "./Styles/Debug.css";
 import App from "./App";
 
 // redux
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import store from "./store";
 // webvitals
 import reportWebVitals from "./reportWebVitals";
 // React Router
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>

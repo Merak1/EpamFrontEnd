@@ -1,56 +1,86 @@
-import Editable from "Components/Other/editable";
-import {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-const User = ({selectedUser}) => {
+import ConfirmationModal from "Components/Other/ConfirmationModal";
+import ContentModal from "Components/Other/ContentModal";
+import UpdateUserModal from "Components/Other/UpdateUserModal";
+
+import { deleteUser } from "../../actions/usersActions";
+
+const User = ({ selectedUser, listWasModified, listModifiedHandler }) => {
+  const dispatch = useDispatch();
+
   const [user, setUser] = useState("");
-  const [task, setTask] = useState("");
 
   useEffect(() => {
     setUser(selectedUser);
-    return () => {
-      console.log(`user => ${user}`);
-      console.log(`user => ${user.firstName}`);
-    };
-  }, [user]);
+  }, [user, selectedUser]);
 
-  const handleNameClick = () => {};
+  const deleteCurrentUser = () => {
+    dispatch(deleteUser(selectedUser._id))
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <>
       {selectedUser ? (
-        <div className="show-User">
-          <h3>User</h3>
+        <div className="userComponent">
+          <h3 className="userComponent-title">User component</h3>
           <section className="userdata_edit">
             <p>First Name:</p>
-            <p className="clickable" onClick={handleNameClick}>
-              {selectedUser.firstName}
-            </p>
+            <p>{selectedUser.firstName}</p>
           </section>
+          <section className="userdata_edit">
+            <p> Last Name:</p>
+            <p> {selectedUser.lastName}</p>
+          </section>
+          <section className="userdata_edit">
+            <p>Email:</p>
+            <p> {selectedUser.email} </p>
+          </section>
+          <section className="userdata_edit">
+            <p>Phone:</p>
+            <p> {selectedUser.phone} </p>
+          </section>
+          <section className="userdata_button">
+            {/* <ContentModal
+              buttonText={"Update"}
+              variant={"primary"}
+              title={"Update"}
+              content={<UpdateUser />}
+              action={"Update user?"}
+              accept={"Update User"}
+              buttonState={false}
+              buttonAction={updateUser}
+              formName={"createNewUserForm"}
+            /> */}
+            <UpdateUserModal
+              buttonText={"update user"}
+              variant={"primary"}
+              action={"Update user?"}
+              accept={"Update"}
+              selectedUser={selectedUser}
+              formId={"formUpdateUser"}
+              listWasModified={listWasModified}
+              listModifiedHandler={listModifiedHandler}
+            ></UpdateUserModal>
 
-          <div className="editable">
-            <Editable text={task} placeholder={selectedUser.firstName} type="input">
-              <input
-                className="test-input"
-                type="text"
-                name="task"
-                placeholder={`Please change the value of ${selectedUser.firstName}`}
-                value={task}
-                onChange={(e) => setTask(e.target.value)}
-              />
-            </Editable>
-          </div>
-
-          {/* <section className="userdata_edit">
-                <p> Last Name:</p>
-                <p className="clickable"> {selectedUser.lastName}</p>
-              </section>
-              <section className="userdata_edit">
-                <p>Email:</p>
-                <p className="clickable"> {selectedUser.email} </p>
-              </section>
-              <section className="userdata_edit">
-                <p>Phone:</p>
-                <p className="clickable"> {selectedUser.phone} </p>
-              </section> */}
+            <ConfirmationModal
+              buttonText={"x"}
+              variant={"danger"}
+              action={"delete this user?"}
+              accept={"Delete User"}
+              buttonState={false}
+              buttonAction={deleteCurrentUser}
+              listWasModified={listWasModified}
+              listModifiedHandler={listModifiedHandler}
+            />
+          </section>
         </div>
       ) : (
         <div>

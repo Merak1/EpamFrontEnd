@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { createUser } from "./../../actions/usersActions";
 
-const AddUser = () => {
+const UpdateUser = () => {
   // state
   const dispatch = useDispatch();
   // form-hook
@@ -27,7 +27,7 @@ const AddUser = () => {
   };
 
   return (
-    <div className="addUserComponent">
+    <div className="updateUserComponent">
       <form id="createNewUserForm" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <label htmlFor="">First Name:</label>
@@ -76,4 +76,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default UpdateUser;

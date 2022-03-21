@@ -9,12 +9,16 @@ import {
 
 // UserService = axios Service http.get
 import UserService from "../services/userService";
-import User from "Components/User/User.js";
 
 export const createUser =
   (firstName, lastName, email, phone) => async (dispatch) => {
     try {
-      const res = await UserService.create({email, firstName, lastName, phone});
+      const res = await UserService.create({
+        email,
+        firstName,
+        lastName,
+        phone,
+      });
       dispatch({
         type: CREATE_USER,
         payload: res.data,
@@ -66,11 +70,12 @@ export const updateUser = (id, data) => async (dispatch) => {
 };
 export const deleteUser = (id) => async (dispatch) => {
   try {
-    await UserService.delete(id);
+    const res = await UserService.remove(id);
     dispatch({
       type: DELETE_USER,
-      payload: {id},
+      payload: { id },
     });
+    console.log(`res => ${res}`);
   } catch (err) {
     console.log(err);
   }
