@@ -11,7 +11,6 @@ import {
 } from "./../../actions/usersActions";
 
 import ConfirmationModal from "Components/Other/ConfirmationModal";
-import AddUserModal from "Components/Other/AddUserModalDELETE";
 import AddUser from "./AddUser";
 import ContentModal from "Components/Other/ContentModal";
 
