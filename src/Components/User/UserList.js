@@ -5,7 +5,7 @@ import User from "../User/User";
 
 import {
   retrieveUsers,
-  findUsersById,
+  findUsersByTitle,
   deleteAllUsers,
   createUser,
 } from "./../../actions/usersActions";
@@ -58,11 +58,12 @@ const UserList = () => {
 
   //TODO This works
 
-  const onChangeSearchUser = (e) => {
-    const searchUser = e.target.value;
-    setSerchUser(searchUser);
-    // console.log(searchUser);
-  };
+  // const onChangeSearchUser = (e) => {
+  //   const searchUser = e.target.value;
+  //   setSerchUser(searchUser);
+  //   // console.log(searchUser);
+  // };
+
   const refreshData = () => {
     setSelectedUser(null);
     setCurrentIndex(-1);
@@ -73,12 +74,6 @@ const UserList = () => {
     setCurrentIndex(index);
 
     console.log("index=> ", index);
-  };
-
-  const findByUser = () => {
-    refreshData();
-    console.log(`Im sending ${searchUser}`);
-    dispatch(findUsersById(searchUser));
   };
 
   const removeAllUsers = () => {
@@ -105,6 +100,15 @@ const UserList = () => {
       });
   };
 
+  const onChangeSearchUser = (e) => {
+    const searchTitle = e.target.value;
+    setSerchUser(searchTitle);
+    console.log(`On change SearchUser is => ${searchUser}`);
+  };
+  const findByUser = () => {
+    refreshData();
+    dispatch(findUsersByTitle(searchUser));
+  };
   if (users !== []) {
     return (
       <div className="userListComponent row  pb-5">
@@ -143,18 +147,21 @@ const UserList = () => {
           <div className=" ">
             {users ? (
               users.map((user, index) => (
-                <div
+                <li
                   onClick={() => {
                     setActiveUser(user, index);
                   }}
-                  className="user-preview clickable border "
+                  // className="user-preview clickable border "
+                  className={`user-preview clickable border ${
+                    index === currentIndex ? "active" : ""
+                  }`}
                   key={user._id}
                 >
                   <p> {user.firstName}</p>
                   <p> {user.lastName}</p>
                   <p>{user.email}</p>
                   <p>{user.phone}</p>
-                </div>
+                </li>
               ))
             ) : (
               <div>
@@ -167,7 +174,7 @@ const UserList = () => {
               buttonText={"Create new User"}
               variant={"primary"}
               title={"Create new User"}
-              content={<AddUser />}
+              content={<AddUser isAdmin={true} />}
               action={"Create new user VERDE?"}
               accept={"Create User"}
               buttonState={false}
@@ -182,7 +189,7 @@ const UserList = () => {
               variant={"danger"}
               action={"delete this user?"}
               accept={"Delete User"}
-              buttonState={true}
+              buttonState={false}
               buttonAction={removeAllUsers}
             />
 

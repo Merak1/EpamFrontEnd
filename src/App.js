@@ -3,7 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import UserList from "./Components/User/UserList";
 import User from "./Components/User/User";
 import AddUser from "./Components/User/AddUser";
-
+import UserCreateNewUser from "Components/Login/UserCreateNewUser";
 import Home from "./Home";
 
 function App() {
@@ -19,11 +19,17 @@ function App() {
               User list
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to={"/createUser"} className="nav-link">
+              createUser
+            </Link>
+          </li>
         </div>
       </nav>
       <div className="container-fluid">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route exact path="/" element={<Home />} />
+          <Route path="/createUser" element={<UserCreateNewUser />} />
           <Route path="/userlist" element={<UserList />} />
         </Routes>
       </div>

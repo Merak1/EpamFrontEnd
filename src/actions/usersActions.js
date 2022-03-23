@@ -11,13 +11,14 @@ import {
 import UserService from "../services/userService";
 
 export const createUser =
-  (firstName, lastName, email, phone) => async (dispatch) => {
+  (firstName, lastName, email, phone, password) => async (dispatch) => {
     try {
       const res = await UserService.create({
         email,
         firstName,
         lastName,
         phone,
+        password,
       });
       dispatch({
         type: CREATE_USER,
@@ -92,13 +93,20 @@ export const deleteAllUsers = () => async (dispatch) => {
     return Promise.reject(err);
   }
 };
-export const findUsersById = (id) => async (dispatch) => {
+export const findUsersByTitle = (title) => async (dispatch) => {
   try {
-    const res = await UserService.findById(id);
+    console.log(`Searching for => ${title} from findUsers on action`);
+    const res = await UserService.findByTitle(title);
     dispatch({
       type: RETRIEVE_USERS,
       payload: res.data,
     });
+    console.log(
+      `result of searching for => ${title},
+      
+      `
+    );
+    console.log(JSON.stringify(res.data));
     return Promise.resolve(res.data);
   } catch (err) {
     console.log(err);
