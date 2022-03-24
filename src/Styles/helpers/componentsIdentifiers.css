@@ -1,4 +1,4 @@
-/*  COMPONENTS  */
+/* COMPONENTS  */
 :root {
   --userListComponent: rgba(36, 139, 113, 0.5);
   --userComponent: rgba(3, 6, 141, 0.5);
@@ -43,4 +43,8 @@
 
 .contentModal {
   background-color: var(--contentModal);
+}
+/* Debug only  */
+.noDisplay {
+  display: none;
 }

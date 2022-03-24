@@ -10,9 +10,9 @@ import {
   createUser,
 } from "./../../actions/usersActions";
 
-import ConfirmationModal from "Components/Other/ConfirmationModal";
+import ConfirmationModal from "Components/Modals/ConfirmationModal";
 import AddUser from "./AddUser";
-import ContentModal from "Components/Other/ContentModal";
+import ContentModal from "Components/Modals/ContentModal";
 
 const UserList = () => {
   const STORE = useStore();
@@ -113,8 +113,8 @@ const UserList = () => {
     return (
       <div className="userListComponent row  pb-5">
         <h1 className="userListComponent-title">
-          userListComponent = hay {users.length}
-          || timees modified = {listWasModified}
+          {/* userListComponent = hay {users.length}
+          || timees modified = {listWasModified} */}
         </h1>
         <div className="user-list row  col-md-9  col-sm-7 justify-content-around">
           <div className="input-group mb-2">
@@ -193,7 +193,7 @@ const UserList = () => {
               buttonAction={removeAllUsers}
             />
 
-            <button
+            {/* <button
               className="btn btn-warning noDisplay"
               onClick={() => {
                 // console.log(JSON.stringify(STORE));
@@ -201,7 +201,7 @@ const UserList = () => {
               }}
             >
               STORE getState userReducer
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="  col-md-3 col-sm-5 mt-5 border show-User">

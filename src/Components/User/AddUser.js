@@ -3,10 +3,46 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 import { createUser } from "./../../actions/usersActions";
+// import React, { useEffect } from "react";
+// import { useForm } from "react-hook-form";
+// import { useDispatch, useSelector, useStore } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+
+// import { toast, ToastContainer } from "react-toastify";
+
+// import { register, reset } from "../../Helpers/Auth/AuthSlice";
+
+// import { deleteUser } from "../../actions/authActions";
+// import { createUser } from "actions/usersActions";
 
 const AddUser = ({ isAdmin }) => {
   // state
+  // const STORE = useStore();
+
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
+
+  // let { user, isLoading, isError, isSuccess, message } = [];
+  // const { user, isLoading, isError, isSuccess, message } = useSelector(
+  //   (state) => state
+  // );
+  // useEffect(() => {
+  //   if (isError) {
+  //     toast.error(message);
+  //   }
+  //   if (isSuccess || user) {
+  //     navigate("/");
+  //   }
+
+  //   console.log(`
+  //               🔻 any of these 🔻
+  //   user, isError, isSuccess, message, navigate
+  //                   triggered
+  //   `);
+  //   dispatch(reset());
+  //   // }, [user, isError, isSuccess, message, navigate]);
+  // }, []);
+
   // form-hook
   const {
     register,
@@ -33,61 +69,93 @@ const AddUser = ({ isAdmin }) => {
         }
       });
   };
+  // const onSubmit = (data) => {
+  //   console.log("data on submit", data);
 
+  //   const { firstName, lastName, email, phone, password } = data;
+  //   console.log(`password=>  ${password}`);
+  //   const userData = {
+  //     firstName,
+  //     lastName,
+  //     email,
+  //     phone,
+  //     password,
+  //   };
+  //   dispatch(register(userData));
+  // };
   return (
     <div className="addUserComponent">
+      {/* <button
+        className="btn btn-warning "
+        onClick={() => {
+          // console.log(JSON.stringify(STORE));
+          console.log(STORE.getState().auth);
+        }}
+      >
+        STORE getState userReducer
+      </button> */}
       <form id="createNewUserForm" onSubmit={handleSubmit(onSubmit)}>
-        <h1> {`${isAdmin}`} </h1>
-        <div className="form-group">
-          <label htmlFor="">First Name:</label>
+        <div className=" form-group  ">
           <input
-            className="form-control"
+            className="form-control "
             type="text"
             name="firstName"
+            placeholder="First Name"
+            // defaultValue={"FirstName"}
             {...register("firstName", {
               required: true,
               maxLength: 20,
             })}
           />
+          {errors.firstName && <span>This field is required</span>}
         </div>
-        <div className="form-group">
-          <label htmlFor="">Last Name:</label>
+        <div className="form-group ">
           <input
             className="form-control"
             type="text"
             name="lastName"
-            {...register("lastName")}
+            placeholder="Last Name"
+            {...register("lastName", {
+              required: true,
+              maxLength: 20,
+            })}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="">Email:</label>
+        <div className="form-group ">
           <input
             className="form-control"
             type="email"
-            name="firstName"
-            {...register("email")}
+            name="email"
+            placeholder="Email"
+            {...register("email", {
+              required: true,
+              // maxLength: 20,
+            })}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="">Phone:</label>
+        <div className="form-group ">
           <input
             className="form-control"
             type="text"
-            name="firstName"
-            {...register("phone")}
+            name="phone"
+            placeholder="Phone"
+            {...register("phone", {
+              required: true,
+              maxLength: 20,
+            })}
           />
         </div>
         {isAdmin === false ? (
-          <div className="form-group">
-            <label htmlFor="">Password:</label>
+          <div className="form-group ">
             <input
               className="form-control"
               type="text"
               name="password"
-              defaultValue={
-                "TODO: Dejar chulo el authentification con password"
-              }
-              {...register("password")}
+              placeholder="Password"
+              {...register("password", {
+                required: true,
+                maxLength: 20,
+              })}
             />
           </div>
         ) : (

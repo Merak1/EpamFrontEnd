@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import ConfirmationModal from "Components/Other/ConfirmationModal";
-import ContentModal from "Components/Other/ContentModal";
-import UpdateUserModal from "Components/Other/UpdateUserModal";
+import ConfirmationModal from "Components/Modals/ConfirmationModal";
+import ContentModal from "Components/Modals/ContentModal";
+import UpdateUserModal from "Components/Modals/UpdateUserModal";
 
 import { deleteUser } from "../../actions/usersActions";
 

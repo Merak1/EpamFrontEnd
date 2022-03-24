@@ -1,13 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./Styles/index.css";
-import "./Styles/componentsIdentifiers.css";
-import "./Styles/Debug.css";
+import "./Styles/App.css";
+import "./Styles/helpers/index.css";
+import "./Styles/helpers/componentsIdentifiers.css";
+
 import App from "./App";
 
 // redux
 import { Provider } from "react-redux";
+// import { store } from "./store";
 import store from "./store";
+
 // webvitals
 import reportWebVitals from "./reportWebVitals";
 // React Router
