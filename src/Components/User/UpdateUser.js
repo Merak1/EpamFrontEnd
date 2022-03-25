@@ -17,13 +17,15 @@ const UpdateUser = () => {
 
   const onSubmit = (data) => {
     const { firstName, lastName, email, phone } = data;
-    dispatch(createUser(firstName, lastName, email, phone))
-      .then((data) => {
-        console.log(`se mandó correctamente ${data}`);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    // acá va un método dispatch para updatear un user
+
+    // dispatch(createUser(firstName, lastName, email, phone))
+    //   .then((data) => {
+    //     console.log(`se mandó correctamente ${data}`);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
   };
 
   return (

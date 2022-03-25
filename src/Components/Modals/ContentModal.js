@@ -18,9 +18,7 @@ const ContentModal = ({
   formId,
 }) => {
   const [show, setShow] = useState(false);
-  const debugFunction = () => {
-    console.log("Button action", buttonAction);
-  };
+
   const handleClose = () => {
     setShow(false);
     console.log(`show content modal => ${show}`);
@@ -34,8 +32,8 @@ const ContentModal = ({
     // debugFunction();
     handleClose();
     buttonAction();
-    listModifiedHandler(listWasModified);
   };
+
   return (
     <>
       <Button variant={variant} onClick={handleShow} disabled={buttonState}>

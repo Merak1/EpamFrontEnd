@@ -53,14 +53,15 @@ const UpdateUserModal = ({
     console.log("data=> ", JSON.stringify({ newUser }));
     console.log(`selectedUser id  => ${id}`);
 
-    dispatch(updateUser(id, data))
-      .then((response) => {
-        console.log("response from updateUserModal", response);
-        listModifiedHandler(listWasModified);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    //! aquí va el metodo disptach para updatear un user
+    // dispatch(updateUser(id, data))
+    //   .then((response) => {
+    //     console.log("response from updateUserModal", response);
+    //     listModifiedHandler(listWasModified);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
   };
 
   return (

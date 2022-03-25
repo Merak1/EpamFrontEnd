@@ -42,12 +42,16 @@ const UserList = () => {
 
   //TODO This works
   // OnLoad, we dispatch the retrieve users
-  useEffect(() => {
-    async function fetchData() {
-      dispatch(retrieveUsers());
-    }
-    fetchData();
-  }, [dispatch, listWasModified]);
+
+  //! Aqui está el useEffect, que se dispara cada que dispatch,
+  //!  y quye la lista se modifica
+  //! En él está el dispatch de retrieve users que se usa para poblar la lista
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     dispatch(retrieveUsers());
+  //   }
+  //   fetchData();
+  // }, [dispatch, listWasModified]);
 
   //Onchange => ,
   useEffect(() => {
@@ -91,13 +95,13 @@ const UserList = () => {
     console.log("New User ", newUser);
     const { firstName, lastName, email, phone } = newUser;
 
-    dispatch(createUser(firstName, lastName, email, phone))
-      .then((data) => {
-        console.log(`se mandó correctamente ${data}`);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    // dispatch(createUser(firstName, lastName, email, phone))
+    //   .then((data) => {
+    //     console.log(`se mandó correctamente ${data}`);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
   };
 
   const onChangeSearchUser = (e) => {
@@ -145,7 +149,7 @@ const UserList = () => {
           </div>
 
           <div className=" ">
-            {users ? (
+            {users === [] ? (
               users.map((user, index) => (
                 <li
                   onClick={() => {

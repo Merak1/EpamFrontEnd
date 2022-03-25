@@ -24,6 +24,8 @@ export const createUser =
         type: CREATE_USER,
         payload: res.data,
       });
+      console.log("from userAactions/front", Promise.resolve(res.data));
+
       return Promise.resolve(res.data);
     } catch (err) {
       return Promise.reject(err);

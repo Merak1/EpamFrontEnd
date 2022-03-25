@@ -48,17 +48,6 @@ const User = ({ selectedUser, listWasModified, listModifiedHandler }) => {
             <p> {selectedUser.phone} </p>
           </section>
           <section className="userdata_button">
-            {/* <ContentModal
-              buttonText={"Update"}
-              variant={"primary"}
-              title={"Update"}
-              content={<UpdateUser />}
-              action={"Update user?"}
-              accept={"Update User"}
-              buttonState={false}
-              buttonAction={updateUser}
-              formName={"createNewUserForm"}
-            /> */}
             <UpdateUserModal
               buttonText={"update user"}
               variant={"primary"}
