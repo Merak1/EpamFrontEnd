@@ -26,7 +26,11 @@ const AddAppointment = () => {
 
   return (
     <div className="addAppointment">
-      <form id="createNewAppointmentForm" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className=" form"
+        id="createNewAppointmentForm"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className=" form-group  ">
           <input
             className="form-control "

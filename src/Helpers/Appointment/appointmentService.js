@@ -3,6 +3,7 @@ import axios from "axios";
 // the service is strictly for makign the http request and sending the data toBePartiallyChecked, and setting any data in local storage
 const API_URL = "/appointments/";
 
+// const API_URL = "http://localhost:4000/appointments/";
 // create new appoinment
 const createAppointment = async (appointmentData, token) => {
   console.log("appointmentData  from app service=> ", appointmentData);
@@ -38,11 +39,22 @@ const deleteAppointment = async (id, token) => {
   const response = await axios.delete(API_URL + id, config);
   return response.data;
 };
+// const updateAppointment = async (newAppointmentData, token) => {
+//   const config = {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   };
 
+//   const response = await axios.put(API_URL, newAppointmentData, config);
+//   console.log(`🎄 appointment successfully updated `, response);
+//   return response.data;
+// };
 const appointmentService = {
   createAppointment,
   getAppointments,
   deleteAppointment,
+  // updateAppointment,
 };
 
 export default appointmentService;

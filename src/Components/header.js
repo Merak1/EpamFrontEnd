@@ -14,32 +14,34 @@ function Header() {
     navigate("/");
   };
   return (
-    <header className="header  navbar   ">
-      <div className="logo">
-        <Link to="/">GoalSetter</Link>
+    <header className="header     ">
+      <div className="logo header-logo">
+        <Link to="/">🏠</Link>
       </div>
-      <ul>
-        {user ? (
-          <li>
-            <button className="btn" onClick={onLogout}>
-              <FaSignOutAlt /> Logout
-            </button>
-          </li>
-        ) : (
-          <>
+      <div className="header-options">
+        <ul>
+          {user ? (
             <li>
-              <Link to="/login">
-                <FaSignInAlt /> Login
-              </Link>
+              <button className="btn" onClick={onLogout}>
+                <FaSignOutAlt /> Logout
+              </button>
             </li>
-            <li>
-              <Link to="/register">
-                <FaUser /> Register
-              </Link>
-            </li>
-          </>
-        )}
-      </ul>
+          ) : (
+            <>
+              <li>
+                <Link to="/login">
+                  <FaSignInAlt /> Login
+                </Link>
+              </li>
+              <li>
+                <Link to="/register">
+                  <FaUser /> Register
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </div>
     </header>
   );
 }

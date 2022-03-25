@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { FaEye } from "react-icons/fa";
+
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +12,17 @@ import { registerUser, reset } from "../../Helpers/Auth/AuthSlice";
 const AddUser = ({ isAdmin }) => {
   // state
   const STORE = useStore();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [password2Shown, setPassword2Shown] = useState(false);
 
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+  const togglePassword2Visiblity = () => {
+    setPassword2Shown(password2Shown ? false : true);
+  };
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
@@ -50,16 +59,12 @@ const AddUser = ({ isAdmin }) => {
 
   return (
     <div className="addUserComponent">
-      <button
-        className="btn btn-warning "
-        onClick={() => {
-          // console.log(JSON.stringify(STORE));
-          console.log(STORE.getState().auth);
-        }}
+      <form
+        autocomplete="off"
+        className=" form"
+        id="createNewUserForm"
+        onSubmit={handleSubmit(onSubmit)}
       >
-        STORE getState userReducer
-      </button>
-      <form id="createNewUserForm" onSubmit={handleSubmit(onSubmit)}>
         <div className=" form-group  ">
           <input
             className="form-control "
@@ -112,10 +117,10 @@ const AddUser = ({ isAdmin }) => {
         </div>
         {isAdmin === false ? (
           <>
-            <div className="form-group ">
+            <div className="form-group form-eye">
               <input
                 className="form-control"
-                type="text"
+                type={passwordShown ? "text" : "password"}
                 name="password"
                 placeholder="Password"
                 {...register("password", {
@@ -123,18 +128,24 @@ const AddUser = ({ isAdmin }) => {
                   maxLength: 20,
                 })}
               />
+              <i className="eye" onClick={togglePasswordVisiblity}>
+                {<FaEye />}
+              </i>
             </div>
-            <div className="form-group ">
+            <div className="form-group form-eye">
               <input
                 className="form-control"
-                type="text"
+                type={password2Shown ? "text" : "password"}
                 name="password2"
-                placeholder="Password2"
+                placeholder="Please repeat the password"
                 {...register("password2", {
                   required: true,
                   maxLength: 20,
                 })}
               />
+              <i className="eye" onClick={togglePassword2Visiblity}>
+                {<FaEye />}
+              </i>
             </div>
           </>
         ) : (

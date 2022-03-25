@@ -30,7 +30,11 @@ const UpdateUser = () => {
 
   return (
     <div className="updateUserComponent">
-      <form id="createNewUserForm" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className=" form"
+        id="createNewUserForm"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="form-group">
           <label htmlFor="">First Name:</label>
           <input

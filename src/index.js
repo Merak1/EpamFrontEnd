@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./Styles/App.css";
 import "./Styles/helpers/index.css";
-import "./Styles/helpers/componentsIdentifiers.css";
+
+import "./Styles/App.css";
+// import "./Styles/helpers/componentsIdentifiers.css";
 
 import App from "./App";
 

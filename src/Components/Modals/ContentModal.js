@@ -31,7 +31,7 @@ const ContentModal = ({
   const onAccept = () => {
     // debugFunction();
     handleClose();
-    buttonAction();
+    // buttonAction();
   };
 
   return (

@@ -6,17 +6,19 @@ const Appointment = ({ appointment }) => {
 
   return (
     <div className="appointment">
-      <p>{new Date(appointment.createdAt).toLocaleString("en-US")} </p>
+      <div className="appointment-buttons">
+        <button
+          className="btn btn-danger"
+          onClick={() => dispatch(deleteAppointment(appointment._id))}
+        >
+          X
+        </button>
+        {/* <button className="btn btn-primary">Editar</button> */}
+      </div>
+      {/* <p>{new Date(appointment.createdAt).toLocaleString("en-US")} </p> */}
       <p> {appointment.createdAt} </p>
       <p> Medical Specialty = {appointment.medicalSpecialty} </p>
       <p> Description = {appointment.description} </p>
-      <button
-        className="btn btn-danger"
-        onClick={() => dispatch(deleteAppointment(appointment._id))}
-      >
-        X
-      </button>
-      <button className="btn btn-primary">Editar</button>
     </div>
   );
 };

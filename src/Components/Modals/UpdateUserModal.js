@@ -77,7 +77,11 @@ const UpdateUserModal = ({
         <Modal.Body>
           {/* <AddUser /> */}
           <div className="add-user">
-            <form id={formId} onSubmit={handleSubmit(onSubmit)}>
+            <form
+              className=" form"
+              id={formId}
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className="form-group">
                 <label htmlFor="">First Name:</label>
                 <input

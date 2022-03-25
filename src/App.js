@@ -1,4 +1,3 @@
-import "./Styles/App.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Routes, Route, Link } from "react-router-dom";

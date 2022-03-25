@@ -13,7 +13,6 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
@@ -46,6 +45,7 @@ const Login = () => {
       email,
       password,
     };
+
     dispatch(loginUser(userData));
   };
   if (!isLoading) {
@@ -54,7 +54,11 @@ const Login = () => {
         <div className="row">
           <h1>Login</h1>
           <p></p>
-          <form id="createNewUserForm" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className=" form"
+            id="createNewUserForm"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div className="form-group ">
               <input
                 className="form-control"
@@ -66,6 +70,7 @@ const Login = () => {
                   // maxLength: 20,
                 })}
               />
+              {errors.email?.type === "required" && "Email is required"}
             </div>
 
             <div className="form-group ">
@@ -79,12 +84,16 @@ const Login = () => {
                   maxLength: 20,
                 })}
               />
+              {errors.password?.type === "required" &&
+                "Please submit a password"}
+              {errors.password?.type === "maxLength" &&
+                "Please submit a password"}
             </div>
           </form>
           <input
             type="submit"
             form={"createNewUserForm"}
-            className="btn btn-primary"
+            className="btn btn-primary input-submit"
             // onClick={onAccept}
           />
         </div>
